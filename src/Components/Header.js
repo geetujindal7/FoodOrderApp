@@ -3,12 +3,12 @@ import imageMeals from '../meals.jpeg'
 import './Header.css'
 import CartIcon from '../cartIcon.jpeg'
 
-function Header() {
+function Header(props) {
     return (
         <>
             <header className='header'>
-                <h1>React Meals</h1>
-                <button className='Cart_Button'>
+                <h1>Food Order</h1>
+                <button onClick={() => props.handleCartClick()} className='Cart_Button'>
                     <span>
                         <img className='icon_cart' src={CartIcon} alt="CartIcon"/>
                     </span>

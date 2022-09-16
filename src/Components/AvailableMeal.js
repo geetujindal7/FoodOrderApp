@@ -2,6 +2,7 @@ import React from 'react'
 import './Meals.css'
 import Card from './Card'
 import MealItem from './MealItem';
+import Cart from './Cart';
 
 const DUMMY_MEALS = [
     {
@@ -45,6 +46,7 @@ function AvailableMeal() {
                }
            </ul>
            </Card> 
+           
        </section>
    </>
   )
