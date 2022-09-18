@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Meals.css'
 import Card from './Card'
 import MealItem from './MealItem';
-import Cart from './Cart';
+import CartContext from './Cart-Context';
 
 const DUMMY_MEALS = [
     {
@@ -30,6 +30,8 @@ const DUMMY_MEALS = [
       price: 18.99,
     },
   ];
+
+
 
 function AvailableMeal() {
   return (

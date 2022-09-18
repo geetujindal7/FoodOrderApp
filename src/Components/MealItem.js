@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useContext, useRef } from 'react'
+import CartContext from './Cart-Context'
 import './Meals.css'
 
 function MealItem({ key, meal }) {
+
+    const amountInputRef = useRef()
+    const context = useContext(CartContext)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const enteredAmount = amountInputRef.current.value;
+        const enteredAmountNumber = +enteredAmount;
+        
+    context.addItem({
+        id: meal.id,
+        name: meal.name,
+        amount: enteredAmountNumber,
+        price: meal.price
+    }) 
+  }
+
+    
+
     return (
         <>
             <li className='mealItemForm'>
@@ -11,14 +32,14 @@ function MealItem({ key, meal }) {
                     <h4>${meal.price}</h4>
                 </div>
                 <div>
-                    <form className='form'>
-                   <div className='amount_form'>
-                   <label>
-                        Amount
-                    </label>
-                        <input className='input_form' type="number" min={1} max={5} step={1} defaultValue={1}></input>
-                   </div>
-                        <button>+ Add</button>
+                    <form className='form' onSubmit={handleSubmit}>
+                        <div className='amount_form'>
+                            <label>
+                                Amount
+                            </label>
+                            <input ref={amountInputRef} className='input_form' type="number" min={0} max={5} step={1} defaultValue={1}></input>
+                        </div>
+                        <button type='submit'>+ Add</button>
                     </form>
 
                 </div>

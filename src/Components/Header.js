@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import imageMeals from '../meals.jpeg'
 import './Header.css'
 import CartIcon from '../cartIcon.jpeg'
+import CartContext from './Cart-Context'
 
 function Header(props) {
+
+    const context = useContext(CartContext )
+    const totalItems = context.items.reduce((curr, item) => {
+        return curr + item.amount;
+    }, 0);
+
     return (
         <>
             <header className='header'>
@@ -16,7 +23,7 @@ function Header(props) {
                         Your Cart
                     </span>
                     <span className='badge'>
-                        3
+                        {totalItems}
                     </span>
                 </button>
             </header>

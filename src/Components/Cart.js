@@ -1,22 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from './Card'
+import CartContext from './Cart-Context'
 import './Cart.css'
 
-function Cart() {
+function Cart(props) {
+
+  const context = useContext(CartContext)
+  const total = context.totalAmount.toFixed(2);
+
+  const hasitems  = context.items.length > 0;
+
+
   return (
     <>
+    <div className='main_cart' onClick={props.Close}>
     <Card>
-      <div>
+      <div >
         <ul className='cart_items'>
           {
-            [{
-              id: 'm1',
-              name: 'sushi',
-              description: 'jhkwagfjfgjgrjhrkhj',
-              amount: '63.34'
-            }].map((e) => {
+           context.items.map((e) => {
               return <>
-                <li>
+                <li className='meals_list'>
                   {e.name}
                 </li>
               </>
@@ -25,18 +29,20 @@ function Cart() {
       </ul>
       <div className='total'>
         <span>Total Amount</span>
-        <span>35.47</span>
+        <span>${total}</span>
       </div>
           <div className='actions'>
-            <button className='button--alt'>
+            <button className='button--alt' onClick={props.Close}>
               Close
             </button>
-            <button className='button'>
+           
+           {hasitems && <button className='button'>
               Order
-            </button>
+            </button>}
           </div>
       </div>
       </Card>
+      </div>
     </>
   )
 }
