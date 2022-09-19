@@ -14,8 +14,78 @@ const defaultCart = {
 const cartReducer = (state, action) => {
   if(action.type === 'ADD')
   {
-    const updated = [...state.items, action.item]
-    const total = state.totalAmount + action.item.price * action.item.amount
+    // console.log(action.item, state.items)
+    // const existing = state.items.findIndex((item) => item.id === action.item.id)
+    // const existingcart = state.items[existing]
+    // const total = state.totalAmount + action.item.price * action.item.amount
+
+    // let updatedItem;
+    // let updated;
+    // if(existingcart)
+    // {
+    //   updatedItem = {
+    //     ...existingcart,
+    //     amount: action.item.amount + existingcart.amount
+    //   }
+    //   updated = [...state.items];
+    //   updated[existing] = updatedItem
+    // }
+    // else{
+    // updated = [...state.items, action.item]
+
+    // }
+
+    const existing = state.items.findIndex((e) => e.id === action.item.id)
+    const existingCart = state.items[existing]
+    console.log(existingCart)
+    const total = state.totalAmount + action.item.price * action.item.amount;
+    
+    let updatedItems;
+
+    if(existingCart)
+    {
+      let updatedItem = {
+        ...existingCart,
+        amount : action.item.amount + existingCart.amount
+      }
+      updatedItems = [...state.items]
+      updatedItems[existing] = updatedItem
+    }
+
+    else{
+       updatedItems = [...state.items, action.item]
+
+    }
+    return {
+      items: updatedItems,
+      totalAmount: total
+    }
+  }
+
+  else if(action.type === 'REMOVE')
+  {
+
+    const existing = state.items.findIndex((item) => item.id === action.id)
+    const existingcart = state.items[existing]
+    console.log(existingcart)
+    const total = state.totalAmount - existingcart.price
+
+    let updatedItem;
+    let updated;
+    if(existingcart.amount === 1)
+   {
+     updated = state.items.filter((i) => i.id !== action.id)
+   }
+   else{
+
+      updatedItem = {
+        ...existingcart,
+        amount: existingcart.amount - 1
+      }
+      updated = [...state.items];
+      updated[existing] = updatedItem
+    
+   }
     return {
       items: updated,
       totalAmount: total
@@ -47,7 +117,7 @@ function App() {
       dispatchCartAction({type: 'ADD', item: item })
     },
     removeItem: (id) => {
-      dispatchCartAction({type: 'ADD', id: id })
+      dispatchCartAction({type: 'REMOVE', id: id })
     }
   }
   

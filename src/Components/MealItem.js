@@ -13,7 +13,7 @@ function MealItem({ key, meal }) {
         const enteredAmount = amountInputRef.current.value;
         const enteredAmountNumber = +enteredAmount;
         
-    context.addItem({
+        context.addItem({
         id: meal.id,
         name: meal.name,
         amount: enteredAmountNumber,

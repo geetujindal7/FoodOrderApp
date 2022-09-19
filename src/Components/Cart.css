@@ -1,9 +1,10 @@
-.cart-items {
+.cart_items {
     list-style: none;
     margin: 0;
     padding: 0;
-    max-height: 20rem;
-    overflow: auto;
+    max-height: 35rem;
+    height: 35rem;
+    overflow: scroll;
   }
   
   .total {
@@ -56,6 +57,7 @@
     background-color: rgba(0, 0, 0, 0.75);
     margin: 20vh 10vw;
     animation: slide-down 300ms ease-out forwards;
+    overflow: scroll;
  }
 
 
@@ -72,4 +74,42 @@
   
   .meals_list{
       list-style: none;
+      font-size: 30px;
+      font-weight: bold;
+
+  }
+
+  .cart_buttons{
+      display: flex;
+      margin-top: 20px;
+      justify-content: space-between;
+      overflow: scroll;
+
+  }
+
+  .price_cart{
+      color: #8a2b06;
+      margin-right: 20px;
+  }
+
+  .amount_cart{
+      background-color: white;
+      color: black;
+      border:  1px solid black ;
+      border-radius: 5px;
+      width: 40px;
+      height: 20px;
+      align-items: center;
+      margin-top: 0px;
+      text-align: center;
+      padding: 0.1rem;
+  }
+
+  .addition_cart button{
+          margin-right: 10px;
+          padding: 0.25rem 1.5rem;
+          color: #8a2b06;
+          border: 1px solid #8a2b06;
+          font-size: 24px;
+          border-radius: 5px;
   }

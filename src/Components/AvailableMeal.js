@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import React, {  } from 'react'
 import './Meals.css'
 import Card from './Card'
 import MealItem from './MealItem';
-import CartContext from './Cart-Context';
 
 const DUMMY_MEALS = [
     {
