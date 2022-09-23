@@ -70,6 +70,9 @@ const cartReducer = (state, action) => {
       totalAmount: total
     }
   }
+  else if(action.type === "CLEAR"){
+    return defaultCart;
+  }
 return defaultCart
 
 }
@@ -97,6 +100,9 @@ function App() {
     },
     removeItem: (id) => {
       dispatchCartAction({type: 'REMOVE', id: id })
+    },
+    clearItem: () => {
+      dispatchCartAction({type: 'CLEAR'})
     }
   }
   

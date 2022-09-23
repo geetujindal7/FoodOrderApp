@@ -6,12 +6,22 @@ import MealItem from './MealItem';
 
 function AvailableMeal() {
 
-  const [state, setstate] = useState([])
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState()
+
+
+
 
   useEffect(() => {
    const fetchData = async () => {
+     setIsLoading(true)
     const resp = await fetch(`https://foodapp-fa71b-default-rtdb.firebaseio.com/DUMMY_MEALS.json`).then((data) => data.json())
-   
+    if(resp === null ) 
+    {
+    
+      throw new Error('Failed to fetch')
+    }
     const loaded = [];
     for (const key in resp)
     {
@@ -22,19 +32,29 @@ function AvailableMeal() {
         price: resp[key].price,
       });
     }
-    setstate(loaded)
+    setData(loaded)
    } 
-   fetchData()
    
+    fetchData().catch((err) =>  setError(err.message))
+   
+  
+   setIsLoading(false)
   }, [])
 
+  if(error) 
+  {
+    return <section className='loading'>{error}</section>
+  }
   return (
-   <>
-       <section  className='meals'>
+   <> 
+   
+       {
+         isLoading ? <section className='loading'>Loading</section> : 
+         <section  className='meals'>
        <Card>
            <ul>
                {
-                   state.map((e) => 
+                  data.map((e) => 
                        <>
                           <MealItem key={e.id} meal={e}/>
                       </>
@@ -44,6 +64,7 @@ function AvailableMeal() {
            </Card> 
            
        </section>
+       }
    </>
   )
 }
